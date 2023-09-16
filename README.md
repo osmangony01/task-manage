@@ -18,3 +18,5 @@
 
 **Technologies Used**: ReactJS, ContextAPI, TailwindCSS, LocalStorage, sweet-alert
 
+**Live Site** : https://resplendent-custard-243bcd.netlify.app/
+
