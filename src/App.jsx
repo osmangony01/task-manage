@@ -23,10 +23,11 @@ const App = () => {
         fetchTodos();
     }, [reload])
 
-    const allTodo = getTodos();
+   
     useEffect(() => {
+        const allTodo = getTodos();
         setTodos(allTodo);
-    },[allTodo, loading])
+    },[reload, loading])
 
     console.log(todos);
     const info = {

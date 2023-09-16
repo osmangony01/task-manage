@@ -13,7 +13,9 @@ const getTodos = () => {
     let todosData = [];
     const todos = localStorage.getItem('todos');
     if (todos) {
-        todosData = JSON.parse(todos);
+        const allTodo = JSON.parse(todos);
+        const sortTodos = allTodo.sort((a, b) => a.id - b.id);
+        todosData = sortTodos;
     }
     return todosData;
 }
@@ -32,12 +34,29 @@ const deleteTodo = (id) => {
 
 }
 
+const editTodo = (todo) => {
+    const todos = getTodos();
+
+    const newTodos = todos.filter(item => item.id !== todo.id);
+    //console.log(newTodos);
+
+    localStorage.setItem("todos", JSON.stringify([...newTodos, todo]))
+}
+
+const updateCompetedMark = (todo) => {
+    const todos = getTodos();
+    const newTodos = todos.filter(item => item.id !== todo.id);
+    //console.log(newTodos);
+    localStorage.setItem("todos", JSON.stringify([...newTodos, todo]))
+}
 
 export {
     saveTodosToLocalDB, 
     getTodos,
     addTodo,
     deleteTodo,
-    
+    editTodo,
+    updateCompetedMark,
+
 }
 

@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { RxCross1 } from "react-icons/rx";
 import { addTodo, getTodos } from "../../utils/localDB";
 import { ContextAPI } from "../../App";
+import Swal from "sweetalert2";
 
 const AddTodo = ({ status, handleModal, length }) => {
 
@@ -13,26 +14,21 @@ const AddTodo = ({ status, handleModal, length }) => {
         handleModal(false)
     }
 
-
     const handleSubmit = (e) => {
         e.preventDefault();
-        
-        //console.log(todo);
-
-        // fetch('https://jsonplaceholder.typicode.com/todos', {
-        //     method: 'POST',
-        //     body: JSON.stringify(todo),
-        //     headers: {
-        //         'Content-type': 'application/json; charset=UTF-8',
-        //     },
-        // })
-        //     .then((response) => response.json())
-        //     .then((json) => console.log(json));
 
         const todos = getTodos();
         const len = todos.length + 1;
-        const todo = { userId: 1, id:len, title, completed: false };
+        const todo = { userId: 1, id: len, title, completed: false };
         addTodo(todo);
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Added Todo is Successful',
+            showConfirmButton: false,
+            timer: 1500
+        })
+        
 
         handleModal(false);
         setLoading(!loading)
