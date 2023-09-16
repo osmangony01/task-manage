@@ -2,12 +2,13 @@ import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import AddTodo from '../AddTodo/AddTodo';
 import { ContextAPI } from '../../App';
+import Todo from './Todo';
 
 
 
 const TodoList = () => {
 
-    const { todos } = useContext(ContextAPI);
+    const { todos, loading, setLoading } = useContext(ContextAPI);
     console.log(todos);
 
     const [allTodo, setAllTodo] = useState([]);
@@ -22,6 +23,9 @@ const TodoList = () => {
     useEffect(() => {
         setAllTodo(todos);
     },[todos])
+
+    
+
 
     return (
         <div className='w-[1000px] mx-auto border px-12 py-6'>
@@ -39,18 +43,19 @@ const TodoList = () => {
                         </div>
                             {
                                 allTodo?.map((item, index) => {
-                                    const { id, title } = item;
-                                    return <div className='w-full grid grid-cols-3 ' key={index}>
-                                        <span className='p-2 border-x border-b col-span-2'>
-                                            <span>{id}. </span>
-                                          <span> {title}</span>
-                                        </span>
-                                        <span className='p-2 text-center border-x border-b col-span-1'>
-                                           <Link to={``}><button className='px-3 py-1 bg-green-500 rounded mx-2  font-semibold text-white hover:bg-green-700'>Edit</button></Link> 
-                                            <button className='px-3 py-1 bg-blue-500 rounded mx-2 font-semibold text-white hover:bg-blue-700'>Delete</button>
-                                            <button className='px-3 py-1 bg-blue-500 rounded mx-2  font-semibold text-white hover:bg-blue-700'>Mark</button>
-                                        </span>
-                                    </div>
+                                    //const { id, title } = item;
+                                    return <Todo item={item} key={index}></Todo>
+                                    // <div className='w-full grid grid-cols-3 ' key={index}>
+                                    //     <span className='p-2 border-x border-b col-span-2'>
+                                    //         <span>{id}. </span>
+                                    //       <span> {title}</span>
+                                    //     </span>
+                                    //     <span className='p-2 text-center border-x border-b col-span-1'>
+                                    //        <Link to={``}><button className='px-3 py-1 bg-green-500 rounded mx-2  font-semibold text-white hover:bg-green-700'>Edit</button></Link> 
+                                    //         <button onClick={()=>handleDeleteTodo(id)} className='px-3 py-1 bg-blue-500 rounded mx-2 font-semibold text-white hover:bg-blue-700'>Delete</button>
+                                    //         <button className='px-3 py-1 bg-blue-500 rounded mx-2  font-semibold text-white hover:bg-blue-700'>Mark</button>
+                                    //     </span>
+                                    // </div>
                                 })
                             }
                         

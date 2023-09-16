@@ -25,10 +25,19 @@ const addTodo = (todo) => {
 
 }
 
+const deleteTodo = (id) => {
+    const todos = getTodos();
+    const newTodos = todos.filter(item => item.id !== id);
+    localStorage.setItem("todos", JSON.stringify(newTodos));
+
+}
+
 
 export {
     saveTodosToLocalDB, 
     getTodos,
-    addTodo
+    addTodo,
+    deleteTodo,
+    
 }
 
