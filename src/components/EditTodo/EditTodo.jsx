@@ -9,7 +9,6 @@ import Swal from "sweetalert2";
 const EditTodo = ({ status, handleEditModal, item }) => {
 
     const { loading, setLoading } = useContext(ContextAPI);
-
     const { title: initialTitle } = item;
     const [title, setTitle] = useState(initialTitle);
 
@@ -21,11 +20,8 @@ const EditTodo = ({ status, handleEditModal, item }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // const todos = getTodos();
-        // const len = todos.length + 1;
         const todo = { ...item, title };
-        console.log(todo)
-        // addTodo(todo);
+        //console.log(todo)
         editTodo(todo);
         Swal.fire({
             position: 'center',

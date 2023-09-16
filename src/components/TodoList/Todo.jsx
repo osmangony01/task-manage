@@ -80,7 +80,6 @@ const Todo = ({ item }) => {
                         }
                     </span>
                     <button onClick={() => handleDeleteTodo(id)} className='px-3 py-1 text-[15px] rounded my-1 mx-2 font-semibold text-black hover:text-white border border-orange-600 hover:bg-orange-700'>Delete</button>
-
                     <span className="pl-6 my-1">
                         {
                             completed == true ? "Completed" : <input onChange={(e) => setComplete(e.target.value)} type="checkbox" />
@@ -88,7 +87,6 @@ const Todo = ({ item }) => {
 
                     </span>
                 </span>
-                {/* <button className='px-3 py-1 bg-blue-500 rounded mx-2  font-semibold text-white hover:bg-blue-700'>Mark</button> */}
             </td>
         </tr>
     );

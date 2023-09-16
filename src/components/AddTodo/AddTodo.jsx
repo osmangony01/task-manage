@@ -29,7 +29,6 @@ const AddTodo = ({ status, handleModal, length }) => {
             timer: 1500
         })
         
-
         handleModal(false);
         setLoading(!loading)
     }

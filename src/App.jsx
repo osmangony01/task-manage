@@ -29,7 +29,7 @@ const App = () => {
         setTodos(allTodo);
     },[reload, loading])
 
-    console.log(todos);
+    
     const info = {
         todos,
         loading,
