@@ -8,9 +8,43 @@ html,
 body,
 label {
     font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
 }
 
-.form-item{
+.form-item {
     @apply flex flex-col bg-white p-6 my-2.5 border border-[#d1d3d6] rounded-lg
 }
 
+.App {
+    font-family: sans-serif;
+    text-align: center;
+    margin: 10px;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.item {
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid red;
+    width: 200px;
+    height: 150px;
+}
+
+.item-img {
+    width: 190px;
+    height: 100px;
+}
+
+.title {
+    font-size: 16px;
+}
+
+.active {
+    color: white;
+    background-color: blue;
+    border: 1px solid black;
+}
