@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,600;1,400;1,600&display=swap');
+
+html,
+body,
+label {
+    font-family: 'Roboto', sans-serif;
+}
+
+.form-item{
+    @apply flex flex-col bg-white p-6 my-2.5 border border-[#d1d3d6] rounded-lg
+}
+
