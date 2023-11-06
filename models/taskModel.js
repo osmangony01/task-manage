@@ -13,4 +13,4 @@ const taskSchema = mongoose.Schema({
 
 const taskModel = mongoose.model("taskRG", taskSchema);
 
-module.exports = userModel;
+module.exports = taskModel;
