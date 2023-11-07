@@ -2,11 +2,13 @@ import React, { useContext, useEffect, useState } from 'react';
 import AddTask from '../AddTask/AddTask';
 import { TaskContextAPI } from '../Profile';
 import Task from './Task';
+import axiosInstance from '../../../routes/axiosInstance';
+import { AuthContext } from '../../../provider/AuthProvider';
 
 
 const TaskList = () => {
-
-    const { tasks } = useContext(TaskContextAPI);
+    const { user } = useContext(AuthContext);
+    const { tasks, setTasks } = useContext(TaskContextAPI);
     const [allTask, setAllTask] = useState([]);
     const [addModel, setAddModal] = useState(false);
 
@@ -15,9 +17,29 @@ const TaskList = () => {
         setAddModal(status)
     }
 
-    const handleSearch = (e) => {
-        const value = e.target.search.value;
-        console.log(value);s
+    const searchTask = async (val,email) => {
+        
+        const query = {taskTitle:val, email}
+        try {
+            const response = await axiosInstance.get("/task-search", {params: query})
+            const data = response.data;
+            console.log(data);
+            setTasks(data);
+        } catch (error) {
+            console.error('Something wrong for fetching search data: ', error);
+        }
+    }
+
+    const handleSearch = (value) => {
+        const email = user?.email;
+        console.log(email)
+        console.log(value);
+        if (value.trim() === "") { }
+        else {
+            setTimeout(() => {
+                searchTask(value, email);
+            }, 600);
+        }
     }
 
     // to assign task of this components state form context api
@@ -36,7 +58,7 @@ const TaskList = () => {
                     {<AddTask status={addModel} handleAddModal={handleAddModal}></AddTask>}
                 </div>
                 <div>
-                    <input name='search' onChange={handleSearch} type="text" placeholder='Search by name' className='border border-purple-500 outline-none mb-3 rounded p-2 hover:border-[#5e3cf7fb] hover:border-2 w-[300px]' />
+                    <input name='search' onChange={(e) => handleSearch(e.target.value)} type="text" placeholder='Search by name' className='border border-purple-500 outline-none mb-3 rounded p-2 hover:border-[#5e3cf7fb] hover:border-2 w-[300px]' />
                 </div>
 
                 <div className='overflow-x-auto w-full '>
