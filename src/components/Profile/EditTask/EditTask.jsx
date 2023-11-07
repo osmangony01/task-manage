@@ -3,25 +3,36 @@ import axiosInstance from '../../../routes/axiosInstance';
 import { RxCross1 } from "react-icons/rx";
 import Swal from 'sweetalert2';
 import { TaskContextAPI } from '../Profile';
+import { useForm } from 'react-hook-form';
 
 const EditTask = ({ status, handleEditModal, item }) => {
-    
+
     const { reload, setReload } = useContext(TaskContextAPI);
     const modal = status;
+    const { register: taskHandle, handleSubmit, watch, formState: { errors } } = useForm({
+        defaultValues: {
+            taskTitle: item.taskTitle,
+            dueDate: new Date(item.dueDate).toISOString().slice(0, 10),
+            priority: item.priority,
+            description: item.description,
 
-    const [taskTitle, setTaskTitle] = useState(item.taskTitle)
-    const [dueDate, setDueDate] = useState(item.dueDate)
-    const [priority, setPriority] = useState(item.priority)
-    const [description, setDescription] = useState(item.description)
-    
+          },
+    });
+
+    // const date = new Date(item.dueDate)
+    // const [taskTitle, setTaskTitle] = useState(item.taskTitle)
+    // const [dueDate, setDueDate] = useState(date)
+    // const [priority, setPriority] = useState(item.priority)
+    // const [description, setDescription] = useState(item.description)
+
     //  // to handle edit modal pop-up
     const handleModal = () => {
         handleEditModal(false)
     }
-    
+
     // handle to update task
     const updateTask = async (taskData) => {
-        const res = await axiosInstance.patch('/update-task',{ ...taskData });
+        const res = await axiosInstance.patch('/task', { ...taskData });
         const data = res.data;
         console.log(data);
         if (data.ok) {
@@ -37,10 +48,11 @@ const EditTask = ({ status, handleEditModal, item }) => {
     }
 
     // handle submit for update task
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const onSubmit = (data) => {
+        // e.preventDefault();
+        console.log(data)
 
-        const taskData = {id:item._id, taskTitle, dueDate, priority, description };
+        const taskData = {id:item._id, ...data };
         updateTask(taskData)
         handleEditModal(false);
     }
@@ -49,22 +61,43 @@ const EditTask = ({ status, handleEditModal, item }) => {
         <div>
             {
                 modal && <div className='h-screen w-full fixed top-0 left-0 flex justify-center items-center bg-black bg-opacity-20 z-50'>
-                    <div className='relative bg-white rounded-md shadow-lg w-[500px]  text-[15px] mx-auto h-[500px] '>
+                    <div className='relative bg-white rounded-md shadow-lg w-[500px]  text-[15px] mx-auto h-[570px] '>
                         <span onClick={handleModal} className='absolute top-[15px] right-[15px] hover:bg-slate-200 p-2 rounded-full'><RxCross1 color='' size={20}></RxCross1></span>
                         <div className="p-10">
-                            <form onSubmit={handleSubmit}>
+                            <form onSubmit={handleSubmit(onSubmit)}>
                                 <h1 className='text-center font-semibold text-2xl pb-4'>Update Task</h1>
                                 <div className='flex flex-col mt-3'>
                                     <label className='pb-1'>Title</label>
-                                    <input onChange={(e)=>setTaskTitle(e.target.value)} className='task-input placeholder:text-sm hover:border-[#5e3cf7fb] hover:border-2' placeholder='Enter title' name="taskTitle" value={taskTitle} />
+                                    <input type='text'
+                                        name="taskTitle"
+                                        // onChange={(e) => setTaskTitle(e.target.value)}
+                                        //value={item.taskTitle}
+                                        {...taskHandle("taskTitle", { required: true })}
+                                        className='task-input placeholder:text-sm hover:border-[#5e3cf7fb] hover:border-2' placeholder='Enter title'
+                                    />
+                                     {errors.taskTitle && <span className="text-red-600 text-sm">The title field is required</span>}
                                 </div>
                                 <div className='flex flex-col mt-3'>
                                     <label className='pb-1'>Due Date</label>
-                                    <input onChange={(e)=>setDueDate(e.target.value)} type='date' className='task-input placeholder:text-sm hover:border-[#5e3cf7fb] hover:border-2' name="dueDate" value={dueDate} />
+                                    <input
+                                        type='date'
+                                        name="dueDate"
+                                        //onChange={(e) => setDueDate(new Date(e.target.value))}
+                                        //value={date.toISOString().slice(0, 10)}
+                                        {...taskHandle("dueDate", { required: true })}
+                                        className='task-input placeholder:text-sm hover:border-[#5e3cf7fb] hover:border-2'
+                                    />
+                                    {errors.dueDate && <span className="text-red-600 text-sm">The date field is required</span>}
                                 </div>
                                 <div className='flex flex-col mt-3'>
                                     <label className='pb-1'>Priority Level</label>
-                                    <select onChange={(e)=>setPriority(e.target.value)} name="priority" className='task-input placeholder:text-sm hover:border-[#5e3cf7fb] hover:border-2' value={priority}>
+                                    <select
+                                        name="priority"
+                                        //onChange={(e) => setPriority(e.target.value)}
+                                        //value={priority}
+                                        {...taskHandle("priority", { required: true })}
+                                        className='task-input placeholder:text-sm hover:border-[#5e3cf7fb] hover:border-2'
+                                    >
                                         <option value="" disabled>Select a priority level</option>
                                         <option value="Low">Low</option>
                                         <option value="Medium">Medium</option>
@@ -73,7 +106,17 @@ const EditTask = ({ status, handleEditModal, item }) => {
                                 </div>
                                 <div className='flex flex-col mt-3'>
                                     <label className='pb-1'>Description</label>
-                                    <textarea onChange={(e)=>setDescription(e.target.value)} className="task-input placeholder:text-sm hover:border-[#5e3cf7fb] hover:border-2" rows={3} placeholder="Type description" name="description" value={description}></textarea>
+                                    <textarea
+                                        type="text"
+                                        name="description"
+                                        //onChange={(e) => setDescription(e.target.value)}
+                                        //value={description}
+                                        {...taskHandle("description", { required: true })}
+                                        rows={3}
+                                        className="task-input placeholder:text-sm hover:border-[#5e3cf7fb] hover:border-2"
+                                        placeholder="Type description"
+                                    ></textarea>
+                                      {errors.description && <span className="text-red-600 text-sm">The description field is required</span>}
                                 </div>
                                 <div className='mt-4'> <button type='submit' className='text-right px-4 py-1.5 bg-[#5e3cf7fb] text-white rounded shadow-md hover:bg-[#3d3bbefb]'>Update Task</button></div>
                             </form>

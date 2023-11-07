@@ -29,9 +29,9 @@ const Task = ({ item, index }) => {
         }).then((result) => {
             if (result.isConfirmed) {
                 async function deleteTask() {
-                    const res = await axiosInstance.delete(`/delete-task/${taskId}`);
+                    const res = await axiosInstance.delete(`/task/${taskId}`);
                     const data = res.data;
-                    if (data.deletedCount > 0) {
+                    if (data.ok) {
                         setReload(!reload);
                         Swal.fire(
                             'Deleted!',
@@ -45,11 +45,12 @@ const Task = ({ item, index }) => {
         })
     }
 
+    const date = new Date(item.dueDate)
     return (
         <tr className={`${(index + 1) % 2 == 0 && 'hover:bg-slate-100'}`} key={index}>
             <td className='border p-2'>{index + 1}</td>
             <td className='border p-2'>{item.taskTitle}</td>
-            <td className='border p-2'>{item.dueDate}</td>
+            <td className='border p-2'>{`${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}`}</td>
             <td className='border p-2'>{item.priority}</td>
             <td className='border p-2'>{item.description}</td>
             <td className='flex justify-evenly items-center border p-2'>

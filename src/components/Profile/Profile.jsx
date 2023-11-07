@@ -15,7 +15,7 @@ const Profile = () => {
     const fetchTaskData = async () => {
         if (user && user.email) {
             const email = user.email;
-            const response = await axiosInstance.get(`/todo`, {params:{email}});
+            const response = await axiosInstance.get(`/tasks`, {params:{email}});
             const data = response.data;
             if (data) {
                 setTasks(data);
@@ -42,7 +42,7 @@ const Profile = () => {
         <div>
             <Navbar></Navbar>
             <TaskContextAPI.Provider value={info}>
-                <div>
+                <div  className='mx-3 lg:mx-0'>
                     <TaskList></TaskList>
                 </div>
             </TaskContextAPI.Provider>

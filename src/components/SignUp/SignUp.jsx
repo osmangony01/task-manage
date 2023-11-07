@@ -38,7 +38,7 @@ const SignUp = () => {
                     .then(() => {
                         //console.log('user name updated ...');
                         const savedUser = { name: name, email: email, role: 'user', photo: photo_url };
-                        fetch(`http://localhost:5005/users`, {
+                        fetch(`http://localhost:5001/add-user`, {
                             method: "POST",
                             headers: {
                                 'content-type': 'application/json'
