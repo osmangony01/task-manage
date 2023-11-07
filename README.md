@@ -1,8 +1,21 @@
-# React + Vite
+## Todo Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Features:
+- Implement User Authentication system(Login, Registration) with Firebase
+- Perform CURD Operation(Create, Update, Read, Delete) on Task
+- Implement React Hook Form for adding task and Updating task
+- Include popup functionality for confirmation dialogs
+- Implement Searching functionality
+- Use NodeJS server using ExpressJS
+- Use Mongoose for schemas
+- Use MongoDB for data handling
 
-Currently, two official plugins are available:
+**Technology Used:** ReactJS, NodeJS, ExpressJS, MongoDB, Mongoose, Firebase, Axios, TailwindCSS
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Live Site :** https://dl-task-client1.web.app/
+
+**Backend Code Link :** https://github.com/osmangony01/task-manage/tree/rg-task-server
+
+Testing Auth  :
+[eamil:user1@gmail.com]
+[pass: 12345678]

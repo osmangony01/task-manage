@@ -15,15 +15,8 @@ const EditTask = ({ status, handleEditModal, item }) => {
             dueDate: new Date(item.dueDate).toISOString().slice(0, 10),
             priority: item.priority,
             description: item.description,
-
           },
     });
-
-    // const date = new Date(item.dueDate)
-    // const [taskTitle, setTaskTitle] = useState(item.taskTitle)
-    // const [dueDate, setDueDate] = useState(date)
-    // const [priority, setPriority] = useState(item.priority)
-    // const [description, setDescription] = useState(item.description)
 
     //  // to handle edit modal pop-up
     const handleModal = () => {
@@ -34,7 +27,7 @@ const EditTask = ({ status, handleEditModal, item }) => {
     const updateTask = async (taskData) => {
         const res = await axiosInstance.patch('/task', { ...taskData });
         const data = res.data;
-        console.log(data);
+        //console.log(data);
         if (data.ok) {
             setReload(!reload);
             Swal.fire({
@@ -49,9 +42,6 @@ const EditTask = ({ status, handleEditModal, item }) => {
 
     // handle submit for update task
     const onSubmit = (data) => {
-        // e.preventDefault();
-        console.log(data)
-
         const taskData = {id:item._id, ...data };
         updateTask(taskData)
         handleEditModal(false);
@@ -70,8 +60,6 @@ const EditTask = ({ status, handleEditModal, item }) => {
                                     <label className='pb-1'>Title</label>
                                     <input type='text'
                                         name="taskTitle"
-                                        // onChange={(e) => setTaskTitle(e.target.value)}
-                                        //value={item.taskTitle}
                                         {...taskHandle("taskTitle", { required: true })}
                                         className='task-input placeholder:text-sm hover:border-[#5e3cf7fb] hover:border-2' placeholder='Enter title'
                                     />
@@ -82,8 +70,6 @@ const EditTask = ({ status, handleEditModal, item }) => {
                                     <input
                                         type='date'
                                         name="dueDate"
-                                        //onChange={(e) => setDueDate(new Date(e.target.value))}
-                                        //value={date.toISOString().slice(0, 10)}
                                         {...taskHandle("dueDate", { required: true })}
                                         className='task-input placeholder:text-sm hover:border-[#5e3cf7fb] hover:border-2'
                                     />
@@ -93,8 +79,6 @@ const EditTask = ({ status, handleEditModal, item }) => {
                                     <label className='pb-1'>Priority Level</label>
                                     <select
                                         name="priority"
-                                        //onChange={(e) => setPriority(e.target.value)}
-                                        //value={priority}
                                         {...taskHandle("priority", { required: true })}
                                         className='task-input placeholder:text-sm hover:border-[#5e3cf7fb] hover:border-2'
                                     >
@@ -109,8 +93,6 @@ const EditTask = ({ status, handleEditModal, item }) => {
                                     <textarea
                                         type="text"
                                         name="description"
-                                        //onChange={(e) => setDescription(e.target.value)}
-                                        //value={description}
                                         {...taskHandle("description", { required: true })}
                                         rows={3}
                                         className="task-input placeholder:text-sm hover:border-[#5e3cf7fb] hover:border-2"

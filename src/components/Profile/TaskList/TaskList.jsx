@@ -17,23 +17,22 @@ const TaskList = () => {
         setAddModal(status)
     }
 
+    // this method handle to find searching result
     const searchTask = async (val,email) => {
-        
         const query = {taskTitle:val, email}
         try {
             const response = await axiosInstance.get("/task-search", {params: query})
             const data = response.data;
-            console.log(data);
+            //console.log(data);
             setTasks(data);
         } catch (error) {
             console.error('Something wrong for fetching search data: ', error);
         }
     }
 
+    // to handle searching
     const handleSearch = (value) => {
         const email = user?.email;
-        console.log(email)
-        console.log(value);
         if (value.trim() === "") { }
         else {
             setTimeout(() => {
@@ -53,12 +52,13 @@ const TaskList = () => {
         <div className=' w-full lg:w-[1000px] mx-auto border px-12 pt-6 pb-10 bg-white mt-3 h-full'>
             <h1 className='text-2xl text-center pb-8 font-semibold'>Welcome to Task Manager</h1>
             <div>
-                <div>
+                <div className='flex justify-end'>
                     <button onClick={() => handleAddModal(true)} className='px-4 py-1.5 bg-blue-500 rounded my-4 font-semibold text-white hover:bg-blue-700'>Add Task + </button>
                     {<AddTask status={addModel} handleAddModal={handleAddModal}></AddTask>}
                 </div>
-                <div>
-                    <input name='search' onChange={(e) => handleSearch(e.target.value)} type="text" placeholder='Search by name' className='border border-purple-500 outline-none mb-3 rounded p-2 hover:border-[#5e3cf7fb] hover:border-2 w-[300px]' />
+                <div className='mb-5'>
+                     <span><span className='text-xl'>Search Task : </span><input name='search' onChange={(e) => handleSearch(e.target.value)} type="text" placeholder='Search by title' className='border border-purple-500 outline-none  rounded p-2 hover:border-[#5e3cf7fb] hover:border-2 w-[300px]' /></span>
+                   
                 </div>
 
                 <div className='overflow-x-auto w-full '>

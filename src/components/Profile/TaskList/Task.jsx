@@ -46,6 +46,7 @@ const Task = ({ item, index }) => {
     }
 
     const date = new Date(item.dueDate)
+    
     return (
         <tr className={`${(index + 1) % 2 == 0 && 'hover:bg-slate-100'}`} key={index}>
             <td className='border p-2'>{index + 1}</td>

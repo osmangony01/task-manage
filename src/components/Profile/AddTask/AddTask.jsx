@@ -12,7 +12,14 @@ const AddTask = ({ status, handleAddModal }) => {
     const { user } = useContext(AuthContext);
     const { reload, setReload } = useContext(TaskContextAPI);
     const modal = status;
-    const { register: taskHandle, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register: taskHandle, handleSubmit, reset , watch, formState: { errors } } = useForm({
+        defaultValues: {
+            taskTitle: "",
+            dueDate: "",
+            priority: "Low", 
+            description: "",
+        },
+    });
 
     // to handle add pop-up modal
     const handleModal = () => {
@@ -23,7 +30,7 @@ const AddTask = ({ status, handleAddModal }) => {
     const createTask = async (taskData) => {
         const res = await axiosInstance.post('/task', { ...taskData });
         const data = res.data;
-        console.log(data);
+        //console.log(data);
         if (data.ok) {
             setReload(!reload);
             Swal.fire({
@@ -38,14 +45,16 @@ const AddTask = ({ status, handleAddModal }) => {
 
     // to handle for adding task
     const onSubmit = (data) => {
-        //e.preventDefault();
-        //console.log(data)
         const email = user?.email;
-
         const taskData = { ...data, email };
-        // //console.log(taskData)
         createTask(taskData)
-        // form.reset();
+        // reset the react hook form 
+        reset({
+            taskTitle: "",
+            dueDate: "",
+            priority: "Low", 
+            description: "",
+        });
         handleAddModal(false);
     }
 
