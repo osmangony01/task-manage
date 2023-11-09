@@ -11,38 +11,39 @@ const LeftSidebar = () => {
     console.log(data)
     console.log('ok')
     return (
-        <div className="col-span-1 bg-white  rounded-lg p-4">
-            <div className="border-2 border-[#E65527] border-opacity-10 flex p-1 rounded-[10px]">
-                <button className="w-1/2 rounded-[10px] px-1 py-[10px] text-center bg-[#fde6df] text-sm text-[#E65527] font-semibold">
-                    Fruits
-                </button>
-                <button className="w-1/2 px-1 py-[10px] text-center text-sm font-semibold">
-                    Vegetables
-                </button>
-            </div>
-
-            <div className="my-4 relative">
-                <input type="text" placeholder='Search Best Food Name' className='py-1 pl-[15px] pr-1 w-full h-[40px] border-2 border-[#E65527] border-opacity-10 placeholder:text-sm outline-none rounded-lg focus:border-[#fcb29b]' />
-                <span className='absolute top-1 right-1 cursor-pointer'>
-                    <Image src={search} width={32} height={32} className="" alt="img" />
-                </span>
-            </div>
-
+        <div className="hidden md2:flex md2:w-[30%] xl:w-1/5 2xl:w-[300px] bg-white  rounded-lg p-4 h-max">
             <div>
-                <p className="text-sm">Fruits List</p>
-                {
-                    data?.map((item, i) => {
-                        return <div key={i} className={`border-2 border-[#E65527] ${i != 0 && 'border-opacity-10'} flex px-[10px] py-2 rounded-[10px] my-2`}>
-                            <span><Image src={i == 0 ? furit1 : i == 1 ? furit2 : furit3} width={44} height={44} alt="img"></Image></span>
-                            <span className='pl-4 flex flex-col '>
-                                <span className='text-sm font-semibold'>{item.name}</span>
-                                <span className='text-[14px]'>Vitamin: {item.vitamin}</span>
-                            </span>
-                        </div>
-                    })
-                }
-            </div>
+                <div className="border-2 border-[#E65527] border-opacity-10 flex p-1 rounded-[10px]">
+                    <button className="w-1/2 rounded-[10px] px-1 py-[10px] text-center bg-[#fde6df] text-sm text-[#E65527] font-semibold">
+                        Fruits
+                    </button>
+                    <button className="w-1/2 px-1 py-[10px] text-center text-sm font-semibold">
+                        Vegetables
+                    </button>
+                </div>
 
+                <div className="my-4 relative">
+                    <input type="text" placeholder='Search Best Food Name' className='py-1 pl-[15px] pr-1 w-full h-[40px] border-2 border-[#E65527] border-opacity-10 placeholder:text-sm outline-none rounded-lg focus:border-[#fcb29b]' />
+                    <span className='absolute top-1 right-1 cursor-pointer'>
+                        <Image src={search} width={32} height={32} className="" alt="img" />
+                    </span>
+                </div>
+                <div>
+                    <p className="text-sm">Fruits List</p>
+                    {
+                        data?.map((item, i) => {
+                            return <div key={i} className={`border-2 border-[#E65527] ${i != 0 && 'border-opacity-10'} flex px-[10px] py-2 rounded-[10px] my-2`}>
+                                <span><Image src={i == 0 ? furit1 : i == 1 ? furit2 : furit3} width={44} height={44} alt="img"></Image></span>
+                                <span className='pl-4 flex flex-col '>
+                                    <span className='text-sm font-semibold'>{item.name}</span>
+                                    <span className='text-[14px]'>Vitamin: {item.vitamin}</span>
+                                </span>
+
+                            </div>
+                        })
+                    }
+                </div>
+            </div>
         </div>
     );
 };

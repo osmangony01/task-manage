@@ -1,3 +1,5 @@
+'user client'
+
 import Image from "next/image";
 import icon1 from "../../public/sb-icon1.svg";
 import icon2 from "../../public/sb-icon2.svg";
@@ -7,7 +9,7 @@ import icon5 from "../../public/sb-icon5.svg";
 
 const LeftMostSidebar = () => {
     return (
-        <div className="w-0 md:w-[65px] bg-white hidden md:flex flex-col justify-center items-center gap-8 h-auto">
+        <div className="w-0 md:w-[65px] bg-white hidden md:flex flex-col pt-40 items-center gap-8 h-auto">
            
                 <span>
                     <Image src={icon1} width={36} height={36} className="" alt="img" />
