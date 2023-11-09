@@ -1,5 +1,6 @@
-import Image from "next/image";
+'use client'
 
+import Image from "next/image";
 import fb from "../../public/facebook.png";
 import link from "../../public/link.png";
 import linkedin from "../../public/linkedin.png";

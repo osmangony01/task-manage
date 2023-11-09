@@ -9,25 +9,13 @@ import icon5 from "../../public/sb-icon5.svg";
 
 const LeftMostSidebar = () => {
     return (
-        <div className="w-0 md:w-[65px] bg-white hidden md:flex flex-col pt-40 items-center gap-8 h-auto">
-           
-                <span>
-                    <Image src={icon1} width={36} height={36} className="" alt="img" />
-                </span>
-                <span>
-                    <Image src={icon2} width={36} height={36} className="" alt="img" />
-                </span>
-                <span>
-                    <Image src={icon3} width={36} height={36} className="" alt="img" />
-                </span>
-                <span>
-                    <Image src={icon4} width={36} height={36} className="" alt="img" />
-                </span>
-                <span>
-                    <Image src={icon5} width={36} height={36} className="" alt="img" />
-                </span>
-           
-        </div>
+        <>
+            <span><Image src={icon1} width={36} height={36} className="" alt="img" /></span>
+            <span><Image src={icon2} width={36} height={36} className="" alt="img" /></span>
+            <span><Image src={icon3} width={36} height={36} className="" alt="img" /></span>
+            <span><Image src={icon4} width={36} height={36} className="" alt="img" /></span>
+            <span><Image src={icon5} width={36} height={36} className="" alt="img" /></span>
+        </>
     );
 };
 
