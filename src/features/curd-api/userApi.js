@@ -1,10 +1,16 @@
 import { apiSlice } from "../apiSlice";
 
 export const userApi = apiSlice.injectEndpoints({
+
     endpoints: (builder) => ({
 
         allUser: builder.query({
-            query: () => "/users"
+            query: () => "/users",
+            providesTags: ["User"]
+        }),
+
+        getUser: builder.query({
+            query: (id) => `/users/${id}`
         }),
 
         userAdd: builder.mutation({
@@ -12,19 +18,20 @@ export const userApi = apiSlice.injectEndpoints({
                 url: "/add-user",
                 method: "POST",
                 body: data
-            })
+            }),
+            invalidatesTags: ["User"]
         }),
 
         userUpdate: builder.mutation({
-            query: (data) => ({
-                url: "/update-user",
-                method: "PUT",
+            query: ({id, data}) => ({
+                url: `/update-user/${id}`,
+                method: "POST",
                 body: data
-            })
+            }),
         }),
 
 
     })
 })
 
-export const { useAllUserQuery, useUserAddMutation, useUserUpdateMutation } = userApi;
+export const { useAllUserQuery, useUserAddMutation, useUserUpdateMutation, useGetUserQuery } = userApi;

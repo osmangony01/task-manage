@@ -38,6 +38,7 @@ const UserList = () => {
                         <th>Email</th>
                         <th>password</th>
                         <th>Bio</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>

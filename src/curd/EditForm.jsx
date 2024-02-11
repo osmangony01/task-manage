@@ -1,35 +1,33 @@
 import { Link } from "react-router-dom";
-import { useFormik, Formik, Field, Form, ErrorMessage } from 'formik';
+import { useFormik, Formik } from 'formik';
 import { addUserValidation } from "../validation/addUserValidation";
-import { useUserAddMutation } from "../features/curd-api/userApi";
+import { useUserAddMutation, useUserUpdateMutation } from "../features/curd-api/userApi";
 
-const initialValues = {
-    name: "",
-    email: "",
-    password: "",
-    cpassword: "",
-    bio: ""
-};
 
-const AddUser = () => {
+const EditForm = ({ user, id }) => {
 
-    const [userAdd, { data: user, isLoading, isError, error: uError, isSuccess }] = useUserAddMutation();
-
+    const [userUpdate, { isLoading, isError, error: uError, isSuccess }] = useUserUpdateMutation()
 
     const { values, errors, handleBlur, handleChange, handleSubmit } = useFormik({
-        initialValues: initialValues,
+        initialValues: {
+            name: user.name,
+            email: user.email,
+            password: user.password,
+            cpassword: user.password,
+            bio: user.bio,
+        },
         validationSchema: addUserValidation,
         onSubmit: (values) => {
-            console.log(values)
+            console.log(values, id)
             const { name, email, password, bio } = values;
-            userAdd({name, email, password, bio});
+            userUpdate({ id: id, data: { name, email, password, bio } });
         },
     })
 
-    console.log("user : ", user);
-    console.log('isError : ', isError);
-    console.log("isLoading : ", isLoading);
-    console.log("uError : ", uError);
+    // console.log("user : ", user);
+    // console.log('isError : ', isError);
+    // console.log("isLoading : ", isLoading);
+    // console.log("uError : ", uError);
 
     return (
 
@@ -93,6 +91,7 @@ const AddUser = () => {
                         placeholder='write bio ...'
                         className='input-control hover:border-purple-500  focus:border-purple-500 focus:border-2'
                         onChange={handleChange}
+                        value={values.bio}
                     ></textarea>
                     {errors.bio && <small>{errors.bio}</small>}
                 </div>
@@ -106,79 +105,4 @@ const AddUser = () => {
     );
 };
 
-export default AddUser;
-
-// it is also working
-
-{/* <div className='rounded py-4 px-8 my-2 border w-[95%] md:w-[500px] mx-auto  hover:border-purple-300 hover:shadow-lg'>
-    <h3 className='text-center text-2xl font-semibold'>Add User</h3>
-    <hr className='my-6' />
-    <Formik
-        initialValues={initialValues}
-        validationSchema={addUserValidation}
-        onSubmit={(values) => {
-            console.log(values)
-        }}
-    >
-        <Form>
-            <div className='mb-3'>
-                <label htmlFor="" className='text-sm'>Name</label>
-                <Field
-                    type="text"
-                    name="name"
-                    placeholder='Enter your name'
-                    className='input-control hover:border-purple-500  focus:border-purple-500 focus:border-2'
-                />
-                <small><ErrorMessage name="name" /></small>
-            </div>
-            <div className='mb-3'>
-                <label htmlFor="" className='text-sm'>Email</label>
-                <Field
-                    type="email"
-                    name="email"
-                    placeholder='Enter your email'
-                    className='input-control hover:border-purple-500  focus:border-purple-500 focus:border-2'
-                />
-                <ErrorMessage name="email" />
-            </div>
-            <div className='mb-3'>
-                <label htmlFor="" className='text-sm'>Password</label>
-                <Field
-                    type="password"
-                    name="password"
-                    placeholder='Enter your password'
-                    className='input-control hover:border-purple-500  focus:border-purple-500 focus:border-2'
-                />
-                <ErrorMessage name="password" />
-            </div>
-            <div className='mb-6'>
-                <label htmlFor="" className='text-sm'>Confirm Password</label>
-                <Field
-                    type="password"
-                    name="cpassword"
-                    placeholder='Enter confirm password'
-                    className='input-control hover:border-purple-500  focus:border-purple-500 focus:border-2'
-                />
-                <ErrorMessage name="cpassword" />
-            </div>
-            <div className='mb-6'>
-                <label htmlFor="" className='text-sm'>Write Bio</label>
-                <Field
-                    type="text"
-                    name="bio"
-                    placeholder='write bio ...'
-                    className='input-control hover:border-purple-500  focus:border-purple-500 focus:border-2'
-                    as="textarea"
-                />
-                <ErrorMessage name="bio" />
-            </div>
-            <div className="">
-                <button type='submit' className='py-1.5 px-5 text-white border bg-purple-500 hover:bg-purple-800 text-base hover:text-white rounded-md hover:font-semibold' >Save</button>
-                <Link to="/">
-                    <button className='ml-2 py-1.5 px-5 bg-white border border-gray-500  hover:bg-gray-600 text-base text-black hover:text-white rounded-md hover:font-semibold' >Back</button></Link>
-            </div>
-        </Form>
-    </Formik>
-
-</div > */}
-
+export default EditForm;

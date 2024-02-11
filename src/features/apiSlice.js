@@ -6,6 +6,6 @@ export const apiSlice = createApi({
         baseUrl:import.meta.env.VITE_REACT_API_URL,
         // credentials: "include"
     }),
-    tagTypes: [],
+    tagTypes: ["User"],
     endpoints: (builder)=>({})
 })
