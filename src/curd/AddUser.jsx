@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useFormik, Formik, Field, Form, ErrorMessage } from 'formik';
 import { addUserValidation } from "../validation/addUserValidation";
+import { useUserAddMutation } from "../features/curd-api/userApi";
 
 const initialValues = {
     name: "",
@@ -12,13 +13,23 @@ const initialValues = {
 
 const AddUser = () => {
 
+    const [userAdd, { data: user, isLoading, isError, error: uError }] = useUserAddMutation();
+
+
     const { values, errors, handleBlur, handleChange, handleSubmit } = useFormik({
         initialValues: initialValues,
         validationSchema: addUserValidation,
         onSubmit: (values) => {
             console.log(values)
+            const { name, email, password, bio } = values;
+            userAdd({name, email, password, bio});
         },
     })
+
+    console.log("user : ", user);
+    console.log('isError : ', isError);
+    console.log("isLoading : ", isLoading);
+    console.log("uError : ", uError);
 
     return (
 
@@ -170,3 +181,4 @@ export default AddUser;
     </Formik>
 
 </div > */}
+
