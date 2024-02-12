@@ -36,7 +36,7 @@ const UserList = () => {
                         <th>#</th>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>password</th>
+                        {/* <th>password</th> */}
                         <th>Bio</th>
                         <th>Action</th>
                     </tr>

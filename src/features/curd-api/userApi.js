@@ -1,7 +1,6 @@
 import { apiSlice } from "../apiSlice";
 
 export const userApi = apiSlice.injectEndpoints({
-
     endpoints: (builder) => ({
 
         allUser: builder.query({
@@ -21,17 +20,30 @@ export const userApi = apiSlice.injectEndpoints({
             }),
             invalidatesTags: ["User"]
         }),
-
+        
         userUpdate: builder.mutation({
-            query: ({id, data}) => ({
+            query: ({ id, data }) => ({
                 url: `/update-user/${id}`,
                 method: "POST",
                 body: data
             }),
+            invalidatesTags: ["User"]
         }),
 
-
+        deleteUser: builder.mutation({
+            query: (id) => ({
+                url: `/delete-user/${id}`,
+                method: "DELETE"
+            }),
+            invalidatesTags: ["User"]
+        })
     })
 })
 
-export const { useAllUserQuery, useUserAddMutation, useUserUpdateMutation, useGetUserQuery } = userApi;
+export const {
+    useAllUserQuery,
+    useUserAddMutation,
+    useUserUpdateMutation,
+    useGetUserQuery,
+    useDeleteUserMutation
+} = userApi;

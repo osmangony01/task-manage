@@ -32,7 +32,7 @@ const EditForm = ({ user, id }) => {
     return (
 
         <div className='rounded py-4 px-8 my-2 border w-[95%] md:w-[500px] mx-auto  hover:border-purple-300 hover:shadow-lg'>
-            <h3 className='text-center text-2xl font-semibold'>Add User</h3>
+            <h3 className='text-center text-2xl font-semibold'>Update User</h3>
             <hr className='my-6' />
             <form onSubmit={handleSubmit} >
                 <div className='mb-3'>
@@ -96,7 +96,7 @@ const EditForm = ({ user, id }) => {
                     {errors.bio && <small>{errors.bio}</small>}
                 </div>
                 <div className="">
-                    <button type='submit' className='py-1.5 px-5 text-white border bg-purple-500 hover:bg-purple-800 text-base hover:text-white rounded-md hover:font-semibold' >Save</button>
+                    <button type='submit' className='py-1.5 px-5 text-white border bg-purple-500 hover:bg-purple-800 text-base hover:text-white rounded-md hover:font-semibold' >Update</button>
                     <Link to="/">
                         <button className='ml-2 py-1.5 px-5 bg-white border border-gray-500  hover:bg-gray-600 text-base text-black hover:text-white rounded-md hover:font-semibold' >Back</button></Link>
                 </div>
