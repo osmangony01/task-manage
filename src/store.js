@@ -10,6 +10,7 @@ export const store = configureStore({
         auth: authSliceReducer,
         task: taskSliceReducer,
     },
+    
 
     middleware: (getDefaultMiddlewares) =>
         getDefaultMiddlewares().concat(apiSlice.middleware)

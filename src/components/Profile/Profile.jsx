@@ -1,9 +1,14 @@
 import React from 'react';
+import Navbar from './Navbar';
+import TaskList from './TaskManage/TaskList';
 
 const Profile = () => {
     return (
         <div>
-            profile
+            <Navbar></Navbar>
+            <div>
+                <TaskList></TaskList>
+            </div>
         </div>
     );
 };
