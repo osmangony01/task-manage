@@ -8,7 +8,8 @@ export const taskApi = apiSlice.injectEndpoints({
         }),
 
         getTask: builder.query({
-            query: (id) => `/task/${id}`
+            query: (id) => `/tasks/${id}`,
+            providesTags: ["Task"]
         }),
 
         addTask: builder.mutation({
@@ -17,6 +18,7 @@ export const taskApi = apiSlice.injectEndpoints({
                 method: "POST",
                 body: data
             }),
+            invalidatesTags: ["Task"]
         }),
 
         updateTask: builder.mutation({
@@ -25,6 +27,7 @@ export const taskApi = apiSlice.injectEndpoints({
                 method: "POST",
                 body: data
             }),
+            invalidatesTags: ["Task"]
         }),
 
         deleteTask: builder.mutation({
@@ -32,6 +35,7 @@ export const taskApi = apiSlice.injectEndpoints({
                 url: `/delete-task/${id}`,
                 method: "DELETE"
             }),
+            invalidatesTags: ["Task"]
         })
     })
 })
