@@ -3,11 +3,14 @@ import { FaTrashAlt } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
 import Swal from 'sweetalert2';
 import EditTask from './EditTask';
+import { useDeleteTaskMutation } from '../../../features/task/taskApi';
 
 
 const Task = ({ item, index }) => {
 
     const [editModel, setEditModal] = useState(false);
+
+    const [deleteTask, {data, isLoading, isError, error, isSuccess}] = useDeleteTaskMutation();
 
     // to handle edit modal pop-up
     const handleEditModal = (status) => {
@@ -15,7 +18,7 @@ const Task = ({ item, index }) => {
     }
 
     // to perform for deletion operation
-    const handleDeleteTask = async (taskId) => {
+    const handleDeleteTask = async (id) => {
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -26,19 +29,13 @@ const Task = ({ item, index }) => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                // async function deleteTask() {
-                //     const res = await axiosInstance.delete(`/delete-task/${taskId}`);
-                //     const data = res.data;
-                //     if (data.status == 200) {
-                //         setReload(!reload);
-                //         Swal.fire(
-                //             'Deleted!',
-                //             'Task data has been deleted.',
-                //             'success'
-                //         )
-                //     }
-                // }
-                // deleteTask();
+                if (result.isConfirmed) {
+                    deleteTask(id);
+                    console.log(data)
+                    // if (data.status == 200) {
+                    //     console.log('success')
+                    // }
+                }
             }
         })
     }
@@ -53,7 +50,7 @@ const Task = ({ item, index }) => {
             <td className='flex justify-evenly items-center border p-2'>
                 <span>
                     <button title='Update' onClick={() => handleEditModal(true)} className='p-1.5 border text-black hover:text-white border-blue-500 rounded mx-2  font-semibold hover:bg-blue-500'><FiEdit size={18}></FiEdit></button>
-                    {/* {<EditTask status={editModel} handleEditModal={handleEditModal} item={item}></EditTask>} */}
+                    {editModel && <EditTask modal={editModel} handleEditModal={handleEditModal} id={item.id}></EditTask>}
                 </span>
                 <button title='Delete' onClick={() => handleDeleteTask(item.id)} className='p-1.5 rounded  font-semibold text-black hover:text-white border border-red-500  hover:bg-red-500'><FaTrashAlt size={16}></FaTrashAlt></button>
             </td>

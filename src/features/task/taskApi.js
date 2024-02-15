@@ -12,6 +12,10 @@ export const taskApi = apiSlice.injectEndpoints({
             providesTags: ["Task"]
         }),
 
+        getSingleTask: builder.query({
+            query: (id)=> `/single-task/${id}`
+        }),
+
         addTask: builder.mutation({
             query: (data) => ({
                 url: "/add-task",
@@ -46,4 +50,5 @@ export const {
     useAddTaskMutation,
     useUpdateTaskMutation,
     useDeleteTaskMutation,
+    useGetSingleTaskQuery,
 } = taskApi;
