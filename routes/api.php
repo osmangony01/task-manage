@@ -24,4 +24,12 @@ Route::middleware(['api', 'auth:api'])->group(function () {
 });
 
 
+Route::get('tasks/{id}', [TaskController::class, 'index']);
+Route::get("single-task/{id}", [TaskController::class, 'fetchTask']);
+Route::post('add-task', [TaskController::class, 'addTask']);
+Route::post('update-task/{id}', [TaskController::class, 'updateTask']);
+Route::delete("delete-task/{id}",[TaskController::class, 'deleteTask']);
+
+
+
 

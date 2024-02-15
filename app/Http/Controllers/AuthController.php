@@ -102,13 +102,13 @@ class AuthController extends Controller
     protected function createNewToken($token)
     {
         // Set the token as an HTTP-only cookie
-        $cookie = cookie('access_token', $token, auth()->factory()->getTTL() * 60, '/', null, false, true);
+        //$cookie = cookie('access_token', $token, auth()->factory()->getTTL() * 60, '/', null, false, true);
 
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60,
+            'expires_in' => auth()->factory()->getTTL() * 3,
             'user' => auth()->user()
-        ])->withCookie($cookie);
+        ]);
     }
 }
