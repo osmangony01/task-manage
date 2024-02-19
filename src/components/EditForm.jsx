@@ -1,35 +1,25 @@
 "use client"
 
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
-import { TodoContextAPI } from '@/app/page';
-import { useDispatch,useSelector} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { updateTodo } from "@/features/todoSlice";
+import { todoFormValidation } from '@/validation/formValidation';
+import { useFormik } from 'formik';
 
 const EditForm = ({ todo }) => {
-
-    // const contextValue = useContext(TodoContextAPI);
-    // const { reload, setReload } = contextValue || {};
-    console.log(todo)
+  
     const dispatch = useDispatch();
-
-    const [title, setTitle] = useState(todo[0].title);
-    const [description, setDescription] = useState(todo[0].description);
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const data = { title, description, id: todo[0].id };
-
-        if (title && description) {
+    const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
+        initialValues: { title: todo[0].title, description: todo[0].description },
+        validationSchema: todoFormValidation,
+        onSubmit: (values) => {
+            const data = { id: todo[0].id, title: values.title, description: values.description };
+            console.log(data)
             dispatch(updateTodo(data));
-        }
-        console.log(data);
-
-        
-        setTitle('');
-        setDescription('');
-    }
-
+        },
+    })
+    
     return (
         <div>
             <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
@@ -38,22 +28,34 @@ const EditForm = ({ todo }) => {
                     <label>Title</label>
                     <input
                         type='text'
+                        name='title'
                         placeholder="Enter title"
                         className="border border-slate-500 px-4  outline-none py-1.5 rounded hover:border-blue-500 hover:border-2"
-                        onChange={(e) => setTitle(e.target.value)}
-                        value={title}
+                        onChange={handleChange}
+                        value={values.title}
                     />
+                    {
+                        touched.title && errors.title ? (
+                            <small className="text-red-500">{errors.title}</small>
+                        ) : null
+                    }
                 </div>
                 <div className='flex flex-col mb-1'>
                     <label>Description</label>
                     <textarea
                         type='text'
+                        name='description'
                         placeholder="type here ..."
                         className="border border-slate-500 px-4 py-1.5 rounded outline-none hover:border-blue-500 hover:border-2"
                         rows={3}
-                        onChange={(e) => setDescription(e.target.value)}
-                        value={description}
+                        onChange={handleChange}
+                        value={values.description}
                     ></textarea>
+                     {
+                        touched.description && errors.description ? (
+                            <small className="text-red-500">{errors.description}</small>
+                        ) : null
+                    }
                 </div>
                 <div className='mt-2'>
                     <button type='submit' className="bg-blue-400  text-white py-1.5 px-3 rounded text-base hover:bg-blue-600">Update Todo</button>

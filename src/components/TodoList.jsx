@@ -1,26 +1,20 @@
 'use client'
 
-import React, { useContext } from 'react';
-// import { deleteTodo, getTodo } from '@/utils/curd';
+import React from 'react';
 import { FiEdit } from "react-icons/fi";
+import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
 import { FaTrashAlt } from "react-icons/fa";
-import { TodoContextAPI } from '@/app/page';
 import Swal from 'sweetalert2';
-import { useDispatch, useSelector } from 'react-redux';
 import { deleteTodo } from '@/features/todoSlice';
 
 const TodoList = () => {
 
-    //const { todo, reload, setReload } = useContext(TodoContextAPI);
-    
     const todo = useSelector((state) => state.todo.todo);
-    console.log(todo)
+    //console.log(todo)
     const dispatch = useDispatch();
     let content = null;
-    // console.log(todo)
-    // console.log('todo list')
-
+    
     const handleDeleteTodo = (id) => {
         Swal.fire({
             title: 'Are you sure?',
@@ -34,9 +28,7 @@ const TodoList = () => {
             if (result.isConfirmed) {
                 if (result.isConfirmed) {
                     dispatch(deleteTodo(id))
-                    
-                    //deleteTodo(id)
-                    // setReload(!reload);
+                   
                 }
             }
         })

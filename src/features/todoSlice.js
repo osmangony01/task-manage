@@ -6,12 +6,12 @@ const initialTodo = {
         {
             id: 1,
             title: "CSS",
-            description: "this is cascading style sheet"
+            description: "It is cascading style sheet"
         },
         {
             id: 2,
             title: "python",
-            description: "this is a high level programming language"
+            description: "It is a high level programming language"
         },
     ],
 };
