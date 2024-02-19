@@ -2,14 +2,17 @@
 
 import React, { useContext, useEffect, useState } from 'react';
 import Link from 'next/link';
-import { addTodo } from '@/utils/curd';
 import { TodoContextAPI } from '../page';
+import { useDispatch, useSelector } from 'react-redux';
+import { addTodo } from "@/features/todoSlice";
 
 
 const AddTodo = () => {
     // const { reload, setReload } = useContext(TodoContextAPI);
-    const contextValue = useContext(TodoContextAPI);
-    const { reload, setReload } = contextValue || {};
+    // const contextValue = useContext(TodoContextAPI);
+    // const { reload, setReload } = contextValue || {};
+    const len = useSelector((state) => state.todo.todo.length);
+    const dispatch = useDispatch();
 
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -17,14 +20,14 @@ const AddTodo = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const data = { title, description };
+        const data = { id: len + 1, title, description };
 
         if (title && description) {
-            addTodo(data);
+            dispatch(addTodo(data));
         }
         console.log(data);
 
-        setReload(!reload);
+        //setReload(!reload);
         setTitle('');
         setDescription('');
     }

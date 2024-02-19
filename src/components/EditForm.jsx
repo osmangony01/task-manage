@@ -2,29 +2,30 @@
 
 import React, { useContext, useState } from 'react';
 import Link from 'next/link';
-import { addTodo, updateTodo } from '@/utils/curd';
 import { TodoContextAPI } from '@/app/page';
-
-
+import { useDispatch,useSelector} from 'react-redux';
+import { updateTodo } from "@/features/todoSlice";
 
 const EditForm = ({ todo }) => {
 
-    const contextValue = useContext(TodoContextAPI);
-    const { reload, setReload } = contextValue || {};
+    // const contextValue = useContext(TodoContextAPI);
+    // const { reload, setReload } = contextValue || {};
+    console.log(todo)
+    const dispatch = useDispatch();
 
-    const [title, setTitle] = useState(todo.title);
-    const [description, setDescription] = useState(todo.description);
+    const [title, setTitle] = useState(todo[0].title);
+    const [description, setDescription] = useState(todo[0].description);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const data = { title, description, id: todo.id };
+        const data = { title, description, id: todo[0].id };
 
         if (title && description) {
-            updateTodo(data, todo.id);
+            dispatch(updateTodo(data));
         }
         console.log(data);
 
-        setReload(!reload);
+        
         setTitle('');
         setDescription('');
     }

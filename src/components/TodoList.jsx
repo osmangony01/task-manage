@@ -1,20 +1,25 @@
 'use client'
 
 import React, { useContext } from 'react';
-import { deleteTodo, getTodo } from '@/utils/curd';
+// import { deleteTodo, getTodo } from '@/utils/curd';
 import { FiEdit } from "react-icons/fi";
 import Link from 'next/link';
 import { FaTrashAlt } from "react-icons/fa";
 import { TodoContextAPI } from '@/app/page';
 import Swal from 'sweetalert2';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteTodo } from '@/features/todoSlice';
 
 const TodoList = () => {
 
-    const { todo, reload, setReload} = useContext(TodoContextAPI);
-   
-    let content = null;
+    //const { todo, reload, setReload } = useContext(TodoContextAPI);
+    
+    const todo = useSelector((state) => state.todo.todo);
     console.log(todo)
-    console.log('todo list')
+    const dispatch = useDispatch();
+    let content = null;
+    // console.log(todo)
+    // console.log('todo list')
 
     const handleDeleteTodo = (id) => {
         Swal.fire({
@@ -28,8 +33,10 @@ const TodoList = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 if (result.isConfirmed) {
-                    deleteTodo(id)
-                    setReload(!reload);
+                    dispatch(deleteTodo(id))
+                    
+                    //deleteTodo(id)
+                    // setReload(!reload);
                 }
             }
         })

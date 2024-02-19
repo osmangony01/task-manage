@@ -1,31 +1,28 @@
 'use client'
 
 import EditForm from '@/components/EditForm';
-import { findTodo } from '@/utils/curd';
+import { findTodo } from '@/features/todoSlice';
+import { data } from 'autoprefixer';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
+import { useDispatch,useSelector} from 'react-redux';
 
 const EditTodo = ({params}) => {
     
     const { id } = params;
+    const todoData = useSelector(state => state.todo.todo);
+    console.log(todoData);
+    const foundTodo = todoData.filter(item => item.id == id);
+
+    console.log(foundTodo)
+
    
-    const [todo, setTodo] = useState(null);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            // Fetch todo data using findTodo
-            const todoData = await findTodo(id);
-            setTodo(todoData);
-            console.log(todoData)
-        };
-        fetchData(); // Call the fetchData function
-    }, [id]); // Re-run effect when id changes
-
-    if (!todo) {
+    if (!foundTodo) {
         return <div>Loading...</div>;
     } else {
-        return <EditForm todo={todo}></EditForm>
+        return <EditForm todo={foundTodo}></EditForm>
     }
+    console.log(todo)
     
    
 };
