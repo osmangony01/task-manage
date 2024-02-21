@@ -1,9 +1,17 @@
+
+
+import Feature from '@/components/Feature';
+import PopularCategory from '@/components/PopularCategory';
+import RecentPost from '@/components/RecentPost';
 import React from 'react';
+
 
 const HomePage = () => {
     return (
         <div>
-            this is home page
+            <Feature></Feature>
+            <PopularCategory></PopularCategory>
+            <RecentPost></RecentPost>
         </div>
     );
 };

@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <Provider store={store}>
           <AuthProvider>
-            {children}
+           <div className='max-w-[1500px] mx-auto'> {children}</div>
           </AuthProvider>
         </Provider>
       </body>

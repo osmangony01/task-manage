@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Contact = () => {
+const MostPopular = () => {
     return (
         <div>
-            contact
+            
         </div>
     );
 };
 
-export default Contact;
+export default MostPopular;

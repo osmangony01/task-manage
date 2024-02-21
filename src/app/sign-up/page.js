@@ -6,10 +6,11 @@ import { useFormik } from 'formik';
 import { useRegisterMutation } from '@/features/auth/authApi';
 import { registerValidation } from '@/validation/formValidation';
 import { useRouter } from 'next/navigation';
+import { IoChevronBack } from "react-icons/io5";
 
 const SignUp = () => {
     const router = useRouter();
-    const [register, { data: user, isLoading, isError, error: uError, isSuccess }] = useRegisterMutation();
+    const [createBlog, { data: user, isLoading, isError, error: uError, isSuccess }] = useRegisterMutation();
     console.log(process.env.SERVER_API_URL);
     const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
         initialValues: { name: "", email: "", password: "", cpassword: "" },
@@ -33,7 +34,8 @@ const SignUp = () => {
 
     return (
         <div className='pt-6'>
-            <div className='w-2/5 max-sm:w-11/12 max-md:w-3/4 max-lg:w-1/2 bg-white mx-auto py-8 px-12 max-sm:px-4 shadow rounded'>
+            <div className='absolute left-8 border px-5 py-1 hover:border-violet-400 rounded cursor-pointer'> <Link href={'/'}><IoChevronBack /></Link></div>
+            <div className='w-2/5 max-sm:w-11/12 max-md:w-3/4 max-lg:w-1/2 bg-white mx-auto py-8 px-12 max-sm:px-4 hover:shadow-lg hover:border-violet-300 rounded border'>
                 <h3 className='text-center text-3xl font-semibold'>Sign Up</h3>
                 <hr className='my-6' />
                 <form action="" className='px-4' onSubmit={handleSubmit}>
@@ -42,7 +44,7 @@ const SignUp = () => {
                         <input
                             type="text"
                             name="name"
-                            className='input-control hover:border-blue-400 focus:border-blue-400 placeholder:text-sm'
+                            className='input-control hover:border-blue-400 focus:border-blue-400 placeholder:text-[13px]'
                             placeholder='Enter your name'
                             onChange={handleChange}
                             value={values.name}
@@ -54,7 +56,7 @@ const SignUp = () => {
                         <input
                             type="text"
                             name="email"
-                            className='input-control hover:border-blue-400 focus:border-blue-400 placeholder:text-sm'
+                            className='input-control hover:border-blue-400 focus:border-blue-400 placeholder:text-[13px]'
                             placeholder='Enter your email'
                             onChange={handleChange}
                             value={values.email}
@@ -66,7 +68,7 @@ const SignUp = () => {
                         <input
                             type="password"
                             name="password"
-                            className='input-control hover:border-blue-400 focus:border-blue-400 placeholder:text-sm'
+                            className='input-control hover:border-blue-400 focus:border-blue-400 placeholder:text-[13px]'
                             placeholder='Enter your password'
                             onChange={handleChange}
                             value={values.password}
@@ -78,7 +80,7 @@ const SignUp = () => {
                         <input
                             type="password"
                             name="cpassword"
-                            className='input-control hover:border-blue-400 focus:border-blue-400 placeholder:text-sm'
+                            className='input-control hover:border-blue-400 focus:border-blue-400 placeholder:text-[13px]'
                             placeholder='Enter your confirm password'
                             onChange={handleChange}
                             value={values.cpassword}

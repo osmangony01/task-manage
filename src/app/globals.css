@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
+/* body{
     background: rgb(236, 236, 250);
-  }
+  } */
   
   .input-control {
     @apply w-full bg-slate-100 box-border py-1 px-3 rounded border-transparent border outline-none

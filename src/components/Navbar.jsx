@@ -10,11 +10,12 @@ import { userLoggedOut } from '@/features/auth/authSlice';
 
 const Navbar = () => {
     const user = useUser();
-    const len = Object.keys(user).length;
+    const userExist = Object.keys(user).length;
     console.log(user)
     const dispatch = useDispatch();
     const [logout, { data, isLoading, isError }] = useLogoutMutation();
     const router = useRouter();
+    
 
     const handleLogOut = () => {
         logout();
@@ -34,11 +35,13 @@ const Navbar = () => {
                 <li className="mx-2"><ActiveLink href="/">Home</ActiveLink></li>
                 <li className="mx-2"><ActiveLink href="/about">About</ActiveLink></li>
                 <li className="mx-2"><ActiveLink href="/contact">Contact</ActiveLink></li>
-                {len==0 &&   <li className="mx-2"><ActiveLink href="/sign-in">Sign In</ActiveLink></li>}
-                {user && len>0 && <li className="mx-2"><ActiveLink href="/profile">Profile</ActiveLink></li>}
-                {user && len>0 && <li className="mx-2"><button onClick={handleLogOut}>Sign Out</button></li>}
+                {user && userExist>0 && <li className="mx-2"><ActiveLink href="/create-blog">Create Blog</ActiveLink></li>}
+                {userExist==0 && <li className="mx-2"><ActiveLink href="/sign-in">Sign In</ActiveLink></li>}
+                {user && userExist>0 && <li className="mx-2"><ActiveLink href="/profile">Profile</ActiveLink></li>}
+                {user && userExist>0 && <li className="mx-2"><button onClick={handleLogOut}>Sign Out</button></li>}
 
             </ul>
+           
         </nav>
     );
 };

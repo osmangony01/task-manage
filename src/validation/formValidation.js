@@ -31,13 +31,13 @@ export const loginValidation = Yup.object({
 })
 
 
-// export const taskValidation = Yup.object({
-//     title: Yup.string()
-//         .required("Title is required!"),
-//     date: Yup.date()
-//         .required("Due Date is required!"),
-//     priority: Yup.string()
-//         .required("Priority is required!"),
-//     description: Yup.string()
-//         .required("Description is required!"),
-// })
+export const blogValidation = Yup.object({
+    title: Yup.string()
+        .required("Title is required!"),
+    image: Yup.mixed()
+        .required("Image is required!"),
+    category: Yup.string()
+        .required("Priority is required!"),
+    description: Yup.string()
+        .required("Description is required!"),
+})

@@ -7,7 +7,7 @@ import { useLoginMutation } from '@/features/auth/authApi';
 import { FaEye, FaEyeSlash, } from 'react-icons/fa';
 import { loginValidation } from '@/validation/formValidation';
 import { useRouter } from 'next/navigation';
-
+import { IoChevronBack } from "react-icons/io5";
 
 const SignIn = () => {
     const [passShow, setPassShow] = useState(true);
@@ -37,7 +37,8 @@ const SignIn = () => {
 
     return (
         <div className='pt-8 pb-16'>
-            <div className='w-2/5 max-sm:w-11/12 max-md:w-2/4 lg:w-1/3 bg-white mx-auto py-10 px-10 max-sm:px-4 shadow rounded'>
+             <div className='absolute left-8 border px-5 py-1 hover:border-violet-400 rounded cursor-pointer'> <Link href={'/'}><IoChevronBack /></Link></div>
+            <div className='w-2/5 max-sm:w-11/12 max-md:w-2/4 lg:w-1/3 bg-white mx-auto py-10 px-10 max-sm:px-4 hover:shadow-lg hover:border-violet-300 rounded border'>
                 <h3 className='text-center text-3xl font-semibold max-sm:text-2xl'>Sign In</h3>
                 <hr className='my-6' />
                 
