@@ -2,7 +2,7 @@ import React from 'react';
 
 const Contact = () => {
     return (
-        <div>
+        <div className='w-3/4 mx-auto'>
             contact
         </div>
     );

@@ -50,7 +50,7 @@ const CreateBlog = () => {
         const formData = new FormData();
         formData.append('title', title);
         formData.append('category', category);
-        formData.append('date', date);
+        formData.append('date', currentDate);
         formData.append('image', image);
         formData.append('user_id', user_id);
         formData.append('description', description);
@@ -61,7 +61,7 @@ const CreateBlog = () => {
    
     return (
         <div>
-            <div className="w-3/4 mx-auto border hover:border-violet-400 mt-6 px-10 py-5 rounded">
+            <div className="w-3/4 mx-auto border hover:border-violet-400 mt-6 px-10 py-5 rounded mb-10">
                 <h1 className='text-xl font-semibold text-center py-5'>Create Blog</h1>
                 <form onSubmit={handleSubmit}>
                     <div className='mb-3'>

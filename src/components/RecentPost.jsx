@@ -1,16 +1,47 @@
+'use client'
+
 import React from 'react';
 import Image from 'next/image';
+import { useAllBlogPostQuery } from '@/features/blog/blogApi';
+import BlogPost from './BlogPost';
 
 const RecentPost = () => {
+
+    const { data, isLoading, isError, error } = useAllBlogPostQuery();
+
+    let content = null;
+    if (isLoading) {
+        content = <div>Loading...</div>;
+    }
+    else if (isError) {
+
+        if (error && error.data.status == 404 && error.data.blog.length == 0) { // Check for 404 status and empty users array
+
+            content = <div>User not found!!</div>;
+        } else {
+            content = <div>There was an error, failed to fetch.</div>;
+        }
+    }
+    else if (data?.blog.length > 0) {
+        content = <div className='col-span-3'>
+            <h1 className='text-xl font-semibold py-6'>Recent Posts</h1>
+            {data.blog.map((item, index) => {
+                return <BlogPost item={item} index={index} key={index} />
+            })}
+        </div>
+    }
+
+
     return (
         <div className='w-4/5 mx-auto mt-5'>
             <div className='grid  grid-cols-3 md:grid-cols-4 gap-6'>
 
-                <div className='col-span-3'>
+                {content}
+                {/* <div className='col-span-3'>
                     <h1 className='text-xl font-semibold py-6'>Recent Posts</h1>
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-5 mb-8'>
                         <div className='relative h-[250px] '>
-                            <Image src="/t2.jpg" alt="t2" fill className='rounded'/>
+                            <Image src="/t2.jpg" alt="t2" fill className='rounded' />
                         </div>
                         <div>
                             <span className='text-sm'>12/12/24</span>
@@ -56,7 +87,7 @@ const RecentPost = () => {
                             <button className="bg-gray-300 text-sm rounded px-2 py-1 hover:font-bold mt-4">Read more</button>
                         </div>
                     </div>
-                </div>
+                </div> */}
                 <div className='col-span-1'>
                     <h1 className='text-xl font-semibold py-6'>Most Popular</h1>
                     <div>
