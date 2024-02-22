@@ -1,14 +1,19 @@
-import PrivateRoute from '@/providers/PrivateRoute';
-import React from 'react';
+import Header from "./Header";
+import Sidebar from "./Sidebar";
 
-const ProfileLayout = ({ children }) => {
+const DashboardLayout = ({ children }) => {
     return (
-        <div>
-            <PrivateRoute>
+        <div className="">
+            <Sidebar></Sidebar>
+        
+            <Header></Header>
+            <div className="bg-slate-100  lg:ml-[250px] p-4">
                 {children}
-            </PrivateRoute>
+            </div>
+           
+
         </div>
     );
 };
 
-export default ProfileLayout;
+export default DashboardLayout;

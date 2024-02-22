@@ -51,7 +51,7 @@ const Navbar = () => {
                             </div>
                             <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 bg-base-100 rounded-box w-52 border border-violet-300 shadow-xl">
                                 <li><Link href={"/"}>Home</Link></li>
-                                <li><a className="justify-between">Profile</a>
+                                <li><Link href={"/profile"} className="justify-between">Profile</Link>
                                 </li>
                                 <li><a>Settings</a></li>
                                 <li onClick={handleLogOut}><Link href={"/"}>Sign Out</Link></li>

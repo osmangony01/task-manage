@@ -20,6 +20,10 @@ export const blogApi = apiSlice.injectEndpoints({
         }),
 
         getSingleBlog: builder.query({
+            query: (id) => `/get-single-blog/${id}`
+        }),
+
+        getBlog: builder.query({
             query: (id) => `/get-blog/${id}`
         }),
 
@@ -49,4 +53,5 @@ export const {
     useGetSingleBlogQuery,
     useUpdateBlogMutation,
     useDeleteBlogMutation,
+    useGetBlogQuery,
 } = blogApi;
