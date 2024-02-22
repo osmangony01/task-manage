@@ -20,11 +20,12 @@ export const blogApi = apiSlice.injectEndpoints({
         }),
 
         getSingleBlog: builder.query({
-            query: (id) => `/get-single-blog/${id}`
+            query: (id) => `/get-single-blog/${id}`,
         }),
 
         getBlog: builder.query({
-            query: (id) => `/get-blog/${id}`
+            query: (id) => `/get-blog/${id}`,
+            providesTags: ["UserBlog"]
         }),
 
         updateBlog: builder.mutation({
@@ -33,7 +34,8 @@ export const blogApi = apiSlice.injectEndpoints({
                 method: "POST",
                 body: data
             }),
-            invalidatesTags: ["Blog"]
+            invalidatesTags: ["Blog"],
+            invalidatesTags: ["UserBlog"]
         }),
 
         deleteBlog: builder.mutation({
@@ -41,7 +43,8 @@ export const blogApi = apiSlice.injectEndpoints({
                 url: `/delete-blog/${id}`,
                 method: "DELETE"
             }),
-            invalidatesTags: ["Blog"]
+            invalidatesTags: ["Blog"],
+            invalidatesTags: ["UserBlog"]
         })
 
     })
