@@ -11,9 +11,9 @@ const Feature = () => {
                 <Image  src='/t1.webp'  alt='home image' fill className='rounded'/>
             </div>
             <div className=''>
-                <h2 className='text-xl font-semibold pb-2'>Who we are</h2>
+                <h2 className='text-3xl font-semibold pb-2'>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h2>
                 <p>
-                    Welcome to PlaySmart, where the world of play comes alive! We are more than just an online marketplace; we are a gateway to joy, imagination, and endless possibilities. Our platform is built on the foundation of creating memorable moments for both young and young-at-heart individuals who cherish the magic of toys.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis ea harum minima incidunt consequatur dolore ad itaque quasi, beatae molestiae magnam. Aut possimus fugiat neque magni quidem. Ut, corrupti sit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis ea harum minima incidunt consequatur dolore ad itaque quasi, beatae molestiae magnam. Aut possimus fugiat neque magni quidem. Ut, corrupti sit.
                 </p>
                 <button className="bg-gray-300 text-sm rounded px-3 py-2 hover:font-bold mt-4">Read more</button>
             </div>

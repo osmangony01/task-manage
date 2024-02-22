@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const BlogPost = ({ item, index }) => {
     return (
@@ -12,7 +13,7 @@ const BlogPost = ({ item, index }) => {
                 <span className='pl-4 text-orange-600'>Culture</span>
                 <h1 className='py-3 font-semibold'>this nature place</h1>
                 <p>asdf loer aoer asdfoe asdlf ower aalsd aosdfsd lasdfoa sd asldfoasd asdf lasdf o asdlfo asdf asdf lasodf as asdfos alsdfweori asldfown vcz;lxko xczvlsdof alsdfowe aosdf asdof ajsf aowe asldfk ower olsjpqola; asodifajf aaoweri</p>
-                <button className="bg-gray-300 text-sm rounded px-2 py-1 hover:font-bold mt-4">Read more</button>
+                <Link href={`/blog/${item.id}`} className="bg-gray-300 text-sm rounded px-2 py-1 hover:font-bold mt-4">Read more</Link>
             </div>
         </div>
     );

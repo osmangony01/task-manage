@@ -13,7 +13,6 @@ const HomePage = () => {
             <Feature></Feature>
             <PopularCategory></PopularCategory>
             <RecentPost></RecentPost>
-            <Footer></Footer>
         </div>
     );
 };

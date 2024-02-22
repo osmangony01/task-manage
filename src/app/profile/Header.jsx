@@ -82,6 +82,7 @@ const Header = () => {
                         {
                             userControl && <div className="absolute right-0 top-12 z-10">
                                 <ul className="menu menu-compact mt-3 p-2 shadow bg-base-100 rounded-md border w-52">
+                                    <li><span><Link href={'/'}>Home</Link></span></li>
                                     <li><span>{user.email}</span></li>
                                     <li onClick={handleLogOut}><a>Sign Out</a></li>
                                 </ul>
