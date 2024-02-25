@@ -24,10 +24,10 @@ Route::get('get-blog/{id}', [BlogController::class, 'getBlog']);
 Route::post('update-blog/{id}', [BlogController::class, 'updateBlog']);
 Route::delete('delete-blog/{id}', [BlogController::class, 'deleteBlog']);
 
-Route::get('all-comment', [CommentController::class, 'allComment']);
+Route::get('all-comment/{id}', [CommentController::class, 'allComment']);
 Route::post('add-comment', [CommentController::class, 'addComment']);
 Route::post('update-comment/{id}', [CommentController::class, 'updateComment']);
-Route::delete('update-comment/{id}', [CommentController::class, 'deleteComment']);
+Route::delete('delete-comment/{id}', [CommentController::class, 'deleteComment']);
 
 
 
