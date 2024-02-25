@@ -41,3 +41,9 @@ export const blogValidation = Yup.object({
     description: Yup.string()
         .required("Description is required!"),
 })
+
+export const commentValidation = Yup.object({
+    comment: Yup.string()
+        .max(255, 'Comment must be 255 characters or less')
+        .required('Comment is required'),
+})

@@ -3,6 +3,7 @@ import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { useAddCommentMutation } from '@/features/comment/commentApi';
 import useUser from '@/hooks/useUser';
+import { commentValidation } from '@/validation/formValidation';
 
 const CommentForm = ({id}) => {
 
@@ -10,11 +11,7 @@ const CommentForm = ({id}) => {
     const [addComment, { data, isLoading, isError, error }] = useAddCommentMutation();
     const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
         initialValues: { comment: "" },
-        validationSchema: Yup.object({
-            comment: Yup.string()
-                .max(255, 'Comment must be 255 characters or less')
-                .required('Comment is required'),
-        }),
+        validationSchema: commentValidation,
         onSubmit: (values) => {
             const user_id = user?.id;
             const data = {
@@ -22,8 +19,8 @@ const CommentForm = ({id}) => {
                 user_id: user_id,
                 comment: values.comment
             };
-            console.log(data);
-           addComment(data);
+            console.log(values);
+            addComment(data);
         },
     })
 

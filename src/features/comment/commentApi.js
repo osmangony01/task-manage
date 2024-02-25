@@ -4,7 +4,8 @@ export const commentApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
 
         allComment: builder.query({
-            query: (id) => `/all-comment/${id}`
+            query: (id) => `/all-comment/${id}`,
+            providesTags: ["Comment"]
         }),
 
         addComment: builder.mutation({
@@ -12,7 +13,8 @@ export const commentApi = apiSlice.injectEndpoints({
                 url: '/add-comment',
                 method: "POST",
                 body: data,
-            })
+            }),
+            invalidatesTags: ["Comment"]
         }),
 
         updateComment: builder.mutation({
@@ -20,14 +22,16 @@ export const commentApi = apiSlice.injectEndpoints({
                 url: `/update-comment/${id}`,
                 method: "POST",
                 body: data,
-            })
+            }),
+            invalidatesTags: ["Comment"]
         }),
 
         deleteComment: builder.mutation({
             query: (id) => ({
                 url: `/delete-comment/${id}`,
                 method: "DELETE"
-            })
+            }),
+            invalidatesTags: ["Comment"]
         })
 
     })
