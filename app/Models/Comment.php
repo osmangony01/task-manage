@@ -2,33 +2,28 @@
 
 namespace App\Models;
 
+use App\Models\Blog;
 use App\Models\User;
-use App\Models\Comment;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Blog extends Model
+class Comment extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'title',
-        'category',
-        'date',
-        'image',
         'user_id',
-        'description',
+        'blog_id',
+        'comment'
     ];
 
-    public function user(): BelongsTo
+    public function user():BelongsTo
     {
         return $this->belongsTo(User::class);
     }
-
-    public function comment():HasMany
+    public function blog():BelongsTo
     {
-        return $this->hasMany(Comment::class);
+        return $this->belongsTo(Blog::class);
     }
 }

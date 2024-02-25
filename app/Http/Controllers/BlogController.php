@@ -195,4 +195,50 @@ class BlogController extends Controller
             ], 500);
         }
     }
+
+    public function fileUpload(Request $req)
+    {
+        $validator = Validator::make($req->all(), [
+            'title' => 'required|string|max:255',
+            'userImg' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 422,
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        try {
+            //option 1
+            // $image = $req->file('userImg');
+            // $sanitizedOriginalName = Str::slug($image->getClientOriginalName());
+            // $imageName = $sanitizedOriginalName . '_' . time() . '.' . $image->getClientOriginalExtension();
+            // // Move the file to the desired location
+            // $image->move('uploads/', $imageName);
+
+            // option 2
+
+            $file = $req->file('userImg');
+
+            // Get the original filename with extension
+            $originalFileName = $file->getClientOriginalName();
+            // Extract the image name without the extension
+            $sanitizedOriginalFileName = substr($originalFileName, 0, strrpos($originalFileName, '.'));
+            // Slug the name for URL-friendly format
+            $sanitizedFileName = Str::slug($sanitizedOriginalFileName);
+            // Generate the final image name with timestamp and extension
+            $fileName = $sanitizedFileName . '_' . time() . '.' . $file->getClientOriginalExtension();
+            $file->move('uploads/', $fileName);
+
+            return response()->json([
+                'status' => 201,
+                'message' => 'Created successfully',
+                'title' => $req->title,
+                'image' => $fileName,
+            ], 201);
+        } catch (\Exception $e) {
+            return response()->json(['status' => 500, 'error' => 'Failed to insert data.', 'err' => $e], 500);
+        }
+    }
 }
