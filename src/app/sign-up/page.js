@@ -10,7 +10,7 @@ import { IoChevronBack } from "react-icons/io5";
 
 const SignUp = () => {
     const router = useRouter();
-    const [createBlog, { data: user, isLoading, isError, error: uError, isSuccess }] = useRegisterMutation();
+    const [register, { data: user, isLoading, isError, error: uError, isSuccess }] = useRegisterMutation();
     console.log(process.env.SERVER_API_URL);
     const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
         initialValues: { name: "", email: "", password: "", cpassword: "" },

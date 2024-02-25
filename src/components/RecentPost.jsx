@@ -4,6 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import { useAllBlogPostQuery } from '@/features/blog/blogApi';
 import BlogPost from './BlogPost';
+import MostPopular from './MostPopular';
 
 const RecentPost = () => {
 
@@ -88,7 +89,7 @@ const RecentPost = () => {
                         </div>
                     </div>
                 </div> */}
-                <div className='col-span-1'>
+                {/* <div className='col-span-1'>
                     <h1 className='text-xl font-semibold py-6'>Most Popular</h1>
                     <div>
                         <button className=' rounded-lg px-2 py-1 bg-orange-400 text-white'>Culture</button>
@@ -96,7 +97,8 @@ const RecentPost = () => {
                         <span>Jhon doe</span>
                         <span>12/12/12</span>
                     </div>
-                </div>
+                </div> */}
+                <MostPopular></MostPopular>
             </div>
         </div>
     );

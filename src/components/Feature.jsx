@@ -1,6 +1,6 @@
 import React from 'react';
 import Image  from 'next/image';
-import homeImg from '/public/t3.jpeg';
+
 
 const Feature = () => {
     return (

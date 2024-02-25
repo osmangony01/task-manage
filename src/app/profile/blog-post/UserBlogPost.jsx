@@ -35,7 +35,7 @@ const UserBlogPost = ({ post }) => {
     return (
         <div className='grid grid-cols-1 md:grid-cols-2 gap-5 mb-8 bg-white p-4 mt-2'>
             <div className='relative h-[250px] '>
-                <Image src="/t2.jpg" alt="t2" fill className='rounded' />
+                <Image src={`http://127.0.0.1:8000/uploads/${post.image}`} alt="t2" fill className='rounded' />
             </div>
             <div className='relative'>
                 <span className='text-sm'>12/12/24</span>
@@ -45,8 +45,8 @@ const UserBlogPost = ({ post }) => {
                         <BsThreeDots size={25} />
                     </div>
                 </div>
-                <h1 className='py-3 font-semibold'>this nature place</h1>
-                <p>asdf loer aoer asdfoe asdlf ower aalsd aosdfsd lasdfoa sd asldfoasd asdf lasdf o asdlfo asdf asdf lasodf as asdfos alsdfweori asldfown vcz;lxko xczvlsdof alsdfowe aosdf asdof ajsf aowe asldfk ower olsjpqola; asodifajf aaoweri</p>
+                <h1 className='py-3 font-semibold'>{post.title}</h1>
+                <p className='text-sm'>{post.description.slice(0,200)}...</p>
                 <button className="bg-gray-300 text-sm rounded px-2 py-1 hover:font-bold mt-4">Read more</button>
             </div>
             <div>
