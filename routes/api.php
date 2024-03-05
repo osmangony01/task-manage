@@ -4,12 +4,14 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AuthProviderController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CommentController;
 
 
-Route::post("register", [AuthController::class, 'register']);
 Route::post("login", [AuthController::class, 'login']);
+Route::post("register", [AuthController::class, 'register']);
+Route::post("register2", [AuthController::class, 'register2']);
 
 // Protected routes
 Route::middleware(['api', 'auth:api'])->group(function () {
@@ -29,13 +31,20 @@ Route::post('add-comment', [CommentController::class, 'addComment']);
 Route::post('update-comment/{id}', [CommentController::class, 'updateComment']);
 Route::delete('delete-comment/{id}', [CommentController::class, 'deleteComment']);
 
+// Route::middleware('api')->group(function () {
+//     Route::get('/auth/{provider}/redirect', [AuthProviderController::class, 'redirect']);
+//     Route::get('/auth/{provider}/callback', [AuthProviderController::class, 'callback']);
+// });
+
+
+Route::get('/auth/{provider}/redirect', [AuthProviderController::class, 'redirect']);
+Route::get('/auth/{provider}/callback', [AuthProviderController::class, 'callback']);
 
 
 
 
 
 
-Route::post('file-upload', [BlogController::class, 'fileUpload']);
 
 
-
+//Route::post('file-upload', [BlogController::class, 'fileUpload']);
