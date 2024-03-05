@@ -7,7 +7,7 @@ const ActiveLink = ({ href, children }) => {
     const pathname = usePathname();
 
     return (
-        <Link href={href} className={pathname === href ? "text-blue-600" : ""}>
+        <Link href={href} className={`hover:text-orange-500 ${pathname === href ? "text-blue-600" : ""}`}>
             {children}
         </Link>
     );

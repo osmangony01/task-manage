@@ -5,6 +5,7 @@ import "./globals.css";
 import { Provider } from 'react-redux'
 import { store } from "./store";
 import AuthProvider from "@/providers/AuthProvider";
+import SocialAuthProvider from "@/providers/SocialAuthProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +20,11 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <Provider store={store}>
           <AuthProvider>
-           <div className='max-w-[1500px] mx-auto'> {children}</div>
+            <SocialAuthProvider>
+              <div className='max-w-[1500px] mx-auto'>
+                {children}
+              </div>
+            </SocialAuthProvider>
           </AuthProvider>
         </Provider>
       </body>

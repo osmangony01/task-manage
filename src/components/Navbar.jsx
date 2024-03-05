@@ -32,16 +32,16 @@ const Navbar = () => {
 
     return (
         <nav className="flex justify-between items-center py-5 px-10 mx-auto bg-white">
-            <h1 className="text-2xl font-semibold">TechBlog</h1>
+            <h1 className="text-2xl font-semibold cursor-pointer"><Link href={'/'}>TechBlog</Link></h1>
             <ul className="flex items-center justify-center">
-                <li className="mx-3"><ActiveLink href="/">Home</ActiveLink></li>
+                <li className="mx-3 "><ActiveLink href="/">Home</ActiveLink></li>
                 <li className="mx-3"><ActiveLink href="/about">About</ActiveLink></li>
                 <li className="mx-3"><ActiveLink href="/contact">Contact</ActiveLink></li>
                 {user && userExist > 0 && <li className="mx-2"><ActiveLink href="/create-blog">Create Blog</ActiveLink></li>}
                 {userExist == 0 && <li className="mx-2"><ActiveLink href="/sign-in">Sign In</ActiveLink></li>}
                 {/* {user && userExist > 0 && <li className="mx-2"><ActiveLink href="/profile">Profile</ActiveLink></li>}
                 {user && userExist > 0 && <li className="mx-2"><button onClick={handleLogOut}>Sign Out</button></li>} */}
-                <li className="mx-3">
+                {user && userExist > 0 && <li className="mx-3">
                     <div className="flex-none">
                         <div className="dropdown dropdown-end">
                             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
@@ -50,15 +50,15 @@ const Navbar = () => {
                                 </div>
                             </div>
                             <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 bg-base-100 rounded-box w-52 border border-violet-300 shadow-xl">
-                                <li><Link href={"/"}>Home</Link></li>
+                                {/* <li><Link href={"/"}>Home</Link></li> */}
                                 <li><Link href={"/profile"} className="justify-between">Profile</Link>
                                 </li>
-                                <li><a>Settings</a></li>
                                 <li onClick={handleLogOut}><Link href={"/"}>Sign Out</Link></li>
                             </ul>
                         </div>
                     </div>
                 </li>
+                }
             </ul>
 
         </nav>

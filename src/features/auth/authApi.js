@@ -40,6 +40,10 @@ export const authApi = apiSlice.injectEndpoints({
             }
         }),
 
+        socialLogin: builder.query({
+            query: () =>  "/auth/google/redirect"
+        }),
+
         logout: builder.mutation({
             query: () => ({
                 url: "/logout",
@@ -50,4 +54,9 @@ export const authApi = apiSlice.injectEndpoints({
     })
 })
 
-export const { useLoginMutation, useRegisterMutation, useLogoutMutation } = authApi;
+export const {
+    useLoginMutation,
+    useRegisterMutation,
+    useLogoutMutation,
+    useSocialLoginQuery,
+} = authApi;

@@ -34,12 +34,20 @@ export const loginValidation = Yup.object({
 export const blogValidation = Yup.object({
     title: Yup.string()
         .required("Title is required!"),
-    image: Yup.mixed()
-        .required("Image is required!"),
     category: Yup.string()
         .required("Priority is required!"),
     description: Yup.string()
         .required("Description is required!"),
+    image: Yup.mixed()
+        .test('fileType', 'Unsupported file format', (value) => {
+            if (!value) return true; // No file provided, skip validation
+            return ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'].includes(value.type);
+        })
+        .test('fileSize', 'File too large', (value) => {
+            if (!value) return true; // No file provided, skip validation
+            return value.size <= 2097152; // 2MB in bytes
+        })
+        .required('Image is Required!')
 })
 
 export const commentValidation = Yup.object({

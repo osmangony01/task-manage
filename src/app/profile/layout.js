@@ -1,19 +1,27 @@
+'use client'
+
+import useAuth from "@/hooks/useAuth";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
+import { useRouter } from 'next/navigation';
 
 const DashboardLayout = ({ children }) => {
-    return (
-        <div className="">
-            <Sidebar></Sidebar>
-        
-            <Header></Header>
-            <div className="bg-slate-100  lg:ml-[250px] p-4">
-                {children}
-            </div>
-           
+    const router = useRouter();
+    const auth = useAuth();
 
-        </div>
-    );
+    if (auth) {
+        return (
+            <div className="">
+                <Sidebar></Sidebar>
+                <Header></Header>
+                <div className="bg-slate-100  lg:ml-[250px] p-4">
+                    {children}
+                </div>
+            </div>
+        );
+    }
+    return router.push('/sign-in');
+    
 };
 
 export default DashboardLayout;

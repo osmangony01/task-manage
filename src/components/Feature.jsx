@@ -5,7 +5,7 @@ import Image  from 'next/image';
 const Feature = () => {
     return (
         <div className="w-4/5 mx-auto">
-        <h2 className="text-3xl font-bold pt-6">Welcome</h2>
+        {/* <h2 className="text-3xl font-bold pt-6">Welcome</h2> */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 pt-10 items-center">
             <div className='h-[330px] relative rounded'>
                 <Image  src='/t1.webp'  alt='home image' fill className='rounded'/>

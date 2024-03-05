@@ -6,15 +6,25 @@ import Image from 'next/image';
 import { FiChevronDown } from "react-icons/fi";
 import useUser from '@/hooks/useUser';
 import Link from 'next/link'
+import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/navigation';
+import { useLogoutMutation } from '@/features/auth/authApi';
+import { userLoggedOut } from '@/features/auth/authSlice';
 
 const Header = () => {
 
     const user = useUser();
     const [userControl, setUserControl] = useState(false);
     const [toggle, setToggle] = useState(false);
+    const dispatch = useDispatch();
+    const [logout, { data, isLoading, isError }] = useLogoutMutation();
+    const router = useRouter();
 
     const handleLogOut = () => {
-
+        logout();
+        localStorage.removeItem('auth');
+        dispatch(userLoggedOut());
+        router.push('/');
     }
 
     //const isRole = useRole();

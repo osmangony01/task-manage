@@ -17,7 +17,7 @@ const Comments = ({ id }) => {
     }
     else if (isError) {
         if (error && error.data.status == 404) {
-            content = <div>Blog is not found!!</div>;
+            content = <div>Comment is not found!!</div>;
         } else {
             content = <div>There was an error, failed to fetch.</div>;
         }

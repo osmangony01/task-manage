@@ -6,12 +6,19 @@ import { useGetSingleBlogQuery } from '@/features/blog/blogApi';
 import CommentForm from './CommentForm';
 import Comments from './Comments';
 import MostPopular from '@/components/MostPopular';
+import useAuth from '@/hooks/useAuth';
+import { useRouter } from 'next/navigation';
 
 const BlogPage = ({ params }) => {
-
+    const router = useRouter();
+    const auth = useAuth();
     const { id } = params;
     console.log(id);
     const { data, isError, isLoading, error } = useGetSingleBlogQuery(id);
+
+    if (!auth) {
+        return router.push('/sign-in');
+    }
 
     let content = null;
     if (isLoading) {
